@@ -27,16 +27,13 @@
 
 	<main>
 		<br>
-		<h2>Search all routes here!</h2>
+		<h2>Enter a zipcode</h2>
 		<br>
 
-		<label id = "label" for="firstval">Starting point:</label>
+		<label id = "label" for="firstval"> </label>
 		<input type="text" id = "firstval" placeholder="Enter text" onblur="getFirstVal()">
-		<p> </p>
-		<label id = "label" for="secondval">Ending point:</label>
-		<input type="text" id = "secondval" placeholder="Enter text" onblur="getSecondVal()">	
-		<p> </p>	
-
+		<br>
+		
 		<button onclick="updateButton()" id = "button">Submit</button>
 		
 		<p> </p>
@@ -61,17 +58,6 @@
 	<br>
 	<br>
 
-<!--	<div id="firstReview">
-	<h4>John Doe</h4>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-	<span class="fa fa-star checked"></span>
-	<span class="fa fa-star checked"></span>
-	<span class="fa fa-star checked"></span>
-	<span class="fa fa-star"></span>
-	<span class="fa fa-star"></span>
-	</div> -->
-	
 	<h2 id="result" style = "display: none">Available Paths:</h2>
 	<center>
 		<img id="stampmckeldin" src="StampMcKeldin.png" style = "display: none;">
@@ -82,28 +68,6 @@
 	<center>
 		<img id="esjplantscience" src="ESJToPlantScience.png" style = "display: none;">
 	</center>
-		
-	
-	<button onclick="addToFavorites()" id = "button" style = "display: none;" >Add to favorites</button>
-
-	
-		<form onsubmit="event.preventDefault(); save();">	
-			<div id="nameStyle" style="display: block;">
-				Name: <input id ="name"> </p>
-			</div>
-			<br>
-			<div id="nameStyle" style="display: block;">
-				<label for="Feedback/Comments">Feedback/Comments:</label>
-				<br>
-				<textarea id="feedback" name="message" rows="7" required> Enter comment here </textarea>
-				<br>
-				<button id="submit" onclick = "save()" style = "display: block;">Submit</button>
-			</div>
-		</form> 
-	
-	
-
-	<!--<div id="reviewsContainer"></div> -->
 
 
 
