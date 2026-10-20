@@ -8,76 +8,68 @@ var data = [['STAMP', 'MCKELDIN LIBRARY'],
 ];
 
 let val1 = "";
-let val2 = "";
 
-function getFirstVal() {
-	val1 = document.getElementById("firstval").value;
+function getZipcode() {
+	val1 = document.getElementById("zipcode").value;
 	if (val1) {
-		val1 = val1.toUpperCase();
 		return val1;
-	}
+	} 
 	return "";
 }
-function getSecondVal() {
-	val2 = document.getElementById("secondval").value;
-	if (val2) {
-		val2 = val2.toUpperCase();
-		return val2;
-	}
-	return "";
-}		
+	
 const button = document.getElementById("button");
 
+// checks if code is empty
+function checkValidity1() {
+    const zip = getZipcode();
+    return zip.length > 0;
+}
 
-//button.addEventListener("click", updateButton());
+// checks if code has 5 characters + 0-9 only
+function checkValidity2() {
+    const zip = getZipcode();
+    const fiveDigitRegex = /^\d{5}$/;
+    return fiveDigitRegex.test(zip);
+}
+
+// checks if value is 00501 or higher
+function checkValidity3() {
+    const zip = getZipcode();
+    const zipNumber = parseInt(zip, 10);
+    return zipNumber >= 501;
+}
+
+function checkIfStored() {
+	if (checkValidity1() && checkValidity2() && checkValidity3()) {
+		const zip = getZipcode();
+		if (zip == 23227) {
+			return true;
+		} 
+		/*const storedValue = localStorage.getItem(zip);
+		if (storedValue) {
+			return true;
+		} else {
+			return false;
+		}*/
+	}
+	return false;
+}
+	
 
 function updateButton() {
-	var index = 0;
 	refreshText();
 	refreshImages();
-	let found = false;
-	if (!getFirstVal() && !getSecondVal()) {
-		displayError4();
-	}
-	else if (!getFirstVal()) {
-		console.log("error1");
+	if (!checkValidity1()) {
 		displayError1();
-	}
-	else if (!getSecondVal()) {
-		console.log("error2");
+	} else if (!checkValidity2()) {
 		displayError2();
-	} 
-	for (let i = 0; i < data.length; i++) {		
-		if (getFirstVal()===data[i][0] && getSecondVal()===data[i][1]) {
-			console.log("Search found!");
-			found = true;
-			index = i;
-			break;
-		}
-	}
-	if (found) {
-		if (index == 0) {
-			displayHeader();
-			displayImage1();
-			displayName();
-			displayComments();
-		}
-		if (index == 1) {
-			displayHeader();
-			displayImage2();
-			displayName();
-			displayComments();
-		}
-		else if (index == 2) {
-			displayHeader();
-			displayImage3();
-			displayName();
-			displayComments();
-		}
-	}
-	else if (getSecondVal() && getFirstVal()) {
-		console.log("Not found");
+	} else if (!checkValidity3()) {
 		displayError3();
+	} else if (!checkIfStored()) {
+		displayError4();
+	} else {
+		displayHeader();
+		displayFound();
 	}
 } 
 
@@ -104,9 +96,6 @@ function refreshImages() {
 	img3.style.display = 'none';
 }
 
-function addToFavorites() {
-
-}
 
 function displayError1() {
 	var text = document.getElementById("error1");
@@ -114,7 +103,9 @@ function displayError1() {
 }
 function displayError4() {
 	var text = document.getElementById("error4");
-	text.style.display = "block";
+    var zip = getZipcode(); 
+    text.innerHTML = `No food resources found for ZIP code ${zip}.`;
+    text.style.display = "block";
 }
 function displayError2() {
 	var text = document.getElementById("error2");
@@ -145,71 +136,4 @@ function displayImage3() {
     img.style.display = 'initial';
 }
 
-
-function submitForm() {
-	var name = document.getElementById('feedback').value;
-
-	var formData = {
-	  name: name,
-	};
-}
-	/*fetch('http://localhost:3000/submit-form', {
-	  method: 'POST',
-	  headers: {
-		'Content-Type': 'application/json'
-	  },
-	  body: JSON.stringify(formData)
-	})
-	.then(response => response.json())
-	.then(data => {
-	  console.log('Server Response:', data);
-	  // Optionally, you can update the UI or redirect the user after successful submission
-	})
-	.catch(error => {
-	  console.error('Error:', error);
-	  // Handle errors or provide feedback to the user
-	}); 
-  } */
- 
-/*import { initializeApp } from "firebase/app";
-import { getDatabase } from "firebase/database";
-
-// TODO: Replace the following with your app's Firebase project configuration
-// See: https://firebase.google.com/docs/web/learn-more#config-object
-const firebaseConfig = {
-  // ...
-  // The value of `databaseURL` depends on the location of the database
-  databaseURL: "https://DATABASE_NAME.firebaseio.com",
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-
-
-// Initialize Realtime Database and get a reference to the service
-const database = getDatabase(app);
-
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-const analytics = getAnalytics(app);
-
-import { getDatabase, ref, set } from "firebase/database";
-function writeUserData(userId, name, email, imageUrl) {
-	const db = getDatabase();
-	set(ref(db, 'users/' + userId), {
-	  username: name,
-	  email: email,
-	  profile_picture : imageUrl
-	});
-  }
-
-import { getDatabase, ref, onValue } from "firebase/database";
-
-const db = getDatabase();
-const starCountRef = ref(db, 'posts/' + postId + '/starCount');
-onValue(starCountRef, (snapshot) => {
-  const data = snapshot.val();
-  updateStarCount(postElement, data);
-}); */
 
