@@ -79,6 +79,12 @@ a.homepg , a:hover{
     transition: .5s;
 }
 
+#homeimg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
 .checkbtn{
     font-size: 30px;
     color: white;
