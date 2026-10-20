@@ -27,27 +27,27 @@
 
 	<main>
 		<br>
-		<h2>Enter a zipcode</h2>
+		<h2>Enter a ZIP code to search</h2>
 		<br>
 
-		<label id = "label" for="firstval"> </label>
-		<input type="text" id = "firstval" placeholder="Enter text" onblur="getFirstVal()">
+		<label id = "label" for="zipcode"> </label>
+		<input type="text" id = "zipcode" placeholder="Enter ZIP code" onblur="getZipcode()">
 		<br>
 		
 		<button onclick="updateButton()" id = "button">Submit</button>
 		
 		<p> </p>
 		<div id="error1" style="display: none;">
-			Please enter a starting point.
+			Please enter a ZIP code to search.
 		</div>
 		<div id="error2" style="display: none;">
-			Please enter an ending point.
-		</div>
-		<div id="error4" style="display: none;">
-			Please enter a starting and ending point.
+			ZIP code must be exactly 5 digits (0-9).
 		</div>
 		<div id="error3" style="display: none;">
-			At least one of the fields above is invalid. Please try again.
+			Please enter a valid U.S. ZIP code.
+		</div>
+		<div id="error4" style="display: none;">
+			No food resources found for ZIP code #####.
 		</div>
 		<div id="found" style="display: none;">
 			Search found! 
@@ -58,7 +58,7 @@
 	<br>
 	<br>
 
-	<h2 id="result" style = "display: none">Available Paths:</h2>
+	<h2 id="result" style = "display: none">Available food resources:</h2>
 	<center>
 		<img id="stampmckeldin" src="StampMcKeldin.png" style = "display: none;">
 	</center>
