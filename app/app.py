@@ -2,7 +2,8 @@
 # IMPORTS
 #####################################################################
 
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, jsonify
+from SQLHelper import SQLHelper
 
 #####################################################################
 # SETUP
@@ -12,6 +13,7 @@ app = Flask(__name__)
 
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
+helper = SQLHelper()
 
 #####################################################################
 # ROUTES
@@ -43,11 +45,21 @@ def explore():
 #####################################################################
 
 
-@app.route("/strokePrediction", methods=["POST"])
-def predict_stroke():
+@app.route("/api/v1.0/search/<zip_code>")
+def search_zip(zip_code):
+    data = {"locations": []}
+    for location in helper.get_data_from_zip((int(zip_code),)):
+        data["locations"].append({
+            "name": location[0],
+            "type": location[1],
+            "secondary_type": location[2],
+            "address": location[3],
+            "latitude": location[4],
+            "longitude": location[5]
+        })
 
     # Return
-    return jsonify({"ok": True})
+    return jsonify(data)
 
 
 #####################################################################
