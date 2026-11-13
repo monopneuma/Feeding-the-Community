@@ -1,16 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<title>Feeding the Community</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="./static/css/explore.css">
-
-<script src="./static/js/explore.js"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/explore.css') }}" />
+<script src="{{ url_for('static', filename='js/explore.js') }}" defer></script>
 <script src="https://kit.fontawesome.com/d6f697fed0.js" crossorigin="anonymous"></script>
-
 </head>
 
 <body>
-
 	<nav>
         <input type="checkbox" id="check">
         <label for="check" class="checkbtn">
@@ -27,49 +25,25 @@
 
 	<main>
 		<br>
-		<h2>Enter a ZIP code to search</h2>
+		<h1>Enter a ZIP code to search</h1>
 		<br>
+		<div class="search-group">
+		<label id = "label" for="search-input" class="visually-hidden" hidden>ZIP code </label>
+		<input
+		 type="text"
+		 id = "search-input" 
+		 placeholder="Enter ZIP code" 
+		 required minlength="5" 
+		 maxlength="10" 
+		 inputmode="numeric"/>
+		<br>
+		<button type="button" id="search-btn">Submit</button>
+		</div>
 
-		<label id = "label" for="zipcode"> </label>
-		<input type="text" id = "zipcode" placeholder="Enter ZIP code" onblur="getZipcode()">
-		<br>
-		
-		<button onclick="updateButton()" id = "button">Submit</button>
-		
-		<p> </p>
-		<div id="error1" style="display: none;">
-			Please enter a ZIP code to search.
-		</div>
-		<div id="error2" style="display: none;">
-			ZIP code must be exactly 5 digits (0-9).
-		</div>
-		<div id="error3" style="display: none;">
-			Please enter a valid U.S. ZIP code.
-		</div>
-		<div id="error4" style="display: none;">
-			No food resources found for ZIP code #####.
-		</div>
-		<div id="found" style="display: none;">
-			Search found! 
-		</div>
-		  
+		<div id="message-box" role="alert"></div>
+		<div id="message-container"></div>
+  
 	</main>
-
-	<br>
-	<br>
-
-	<h2 id="result" style = "display: none">Available food resources:</h2>
-	<center>
-		<img id="stampmckeldin" src="./static/images/StampMcKeldin.png" style = "display: none;">
-	</center>
-	<center>
-		<img id="princefredericksouthcampus" src="./static/images/PrinceFredrickSouthCampus.png" style = "display: none;">
-	</center>
-	<center>
-		<img id="esjplantscience" src="./static/images/ESJToPlantScience.png" style = "display: none;">
-	</center>
-
-
 
 </body>
 </html>

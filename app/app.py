@@ -47,6 +47,8 @@ def explore():
 
 @app.route("/api/v1.0/search/<zip_code>")
 def search_zip(zip_code):
+    if not zip_code.isdigit() or len(zip_code) != 5: # checks if searched zipcode is a digit or length 5
+        return jsonify({"error": "Invalid Zipcode"}), 400
     data = {"locations": []}
     for location in helper.get_data_from_zip((int(zip_code),)):
         data["locations"].append({
