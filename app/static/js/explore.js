@@ -35,6 +35,8 @@ async function handleZipSearch() {
 		const data = await response.json();
 		const locations = data.locations || []; // falls back to [] if data missing
 	
+		container.innerHTML = ''; // wipe the old HTML elements immediately
+
 		// check if list is empty
 		if (locations.length === 0) {
 			messageBox.textContent = 'No matching locations found for this zipcode.';
